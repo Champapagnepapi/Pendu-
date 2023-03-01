@@ -1,0 +1,67 @@
+#page {
+	background-color:fcd315;
+	border:1px solid black;
+	text-align:left;
+	width:60%;
+	padding:30px;
+	height:450px;
+}
+
+
+h1 {
+	font-size:30px;
+	font-family:Arial, sans serif;
+}
+
+#clavier{
+	border: thick double black;
+	padding:10px;
+	background-color:rgb(9, 232, 9);
+}
+
+#clavier td {
+	background-color:white;
+	border:1px solid black;
+	width:25px;
+	height:25px;
+	text-align:center;
+	font-weight:bold;
+	cursor:pointer;
+}
+
+a.lien{
+	color:blue;
+	text-decoration:none;
+	font-size:20px;
+}
+
+a.lien:hover{
+	color:rgba(0, 255, 4, 0.846);
+	font-weight:bold;
+	text-decoration:underline;
+}
+
+
+
+#mot {
+	margin:30px 0 0 0;
+	clear:both;
+	top:100px;
+}
+
+#mot td {
+	padding:5px;
+	border:2px outset black;
+	width:30px;
+	height:30px;
+	font-weight:bold;	
+	text-align:center;
+}
+
+ #mot p{
+	visibility:hidden;
+}
+img{
+	float:right;
+	width: 300px;
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu du pendu</title>
+    <link rel="Stylesheet" href="StylePendu.css">
+   
+    
+    
+    
+    
+<script>
+    
+	let score = 0;
+    let motSecret;
+        
+    let now=new Date();			
+    let tableauMot=new Array();	
+    let mots=new Array();		
+        
+    let tailleMot;				
+    let coupsManques=0;			
+    let lettresTrouvees=0;		
+    let finDuJeu=false;	
+        
+    mots[0] = "THALES"
+    mots[1] = "POMPIER"
+    mots[2] = "POLICIER"
+    mots[3] = "PLACARD"
+    mots[4] = "RADIATEUR"
+    mots[5] = "DEODORANT"
+    mots[6] = "CAMION"
+    mots[7] = "HORLOGE"
+    mots[8] = "RATEAU"
+    mots[9] = "ELEPHANT"
+    mots[10] = "BANANE"
+    mots[11] = "NAVIRE"
+        
+      
+        motSecret=mots[now.getSeconds() % mots.length];
+        tailleMot=motSecret.length;
+   
+
+
+
+        function changeCouleur(element,couleur){
+            element.style.backgroundColor=couleur;
+        }
+        
+        
+        function proposer(element){
+            
+            
+            if(element.style.backgroundColor=="lightGreen" ||finDuJeu) return;
+            
+           
+            let lettre=element.innerHTML;
+            changeCouleur(element,"lightGreen");
+            
+            
+            let trouve=false;
+            
+            
+            for(var i=0; i<tailleMot; i++) {
+                
+                
+                if(tableauMot[i].innerHTML==lettre) {
+                    tableauMot[i].style.visibility='visible';	//pour afficher la lettre si le joueur l'a trouvé
+                    trouve=true;
+                    lettresTrouvees++;
+                }
+                
+            }
+            
+            let afFi_score = document.getElementById("score");
+            if(!trouve){
+                coupsManques++;
+                //window.alert(coupsManques);
+                let image = document.getElementById("image");
+                image.setAttribute('src', "images/Pendu_" + coupsManques + ".png"); // On change l'image du pendu
+                score = score - 1;
+               
+                afFi_score.textContent = "Votre score est de : " + score + " / il vous reste : " + (6 - coupsManques) + " de coups";
+
+            }
+
+            if(coupsManques > 6){
+                    window.alert("Vous avez perdu !");
+                    for(var i=0; i<tailleMot; i++) tableauMot[i].style.visibility='visible';
+                    finDuJeu=true;
+
+                    afFi_score.textContent = "Partie perdu";
+                    
+                }
+            if(lettresTrouvees==tailleMot){
+                alert("Bravo ! Vous avez trouve le mot cache");
+                finDuJeu=true;
+            }
+
+         
+            
+        }
+
+</script>
+    
+</head>
+<body>
+    <center>
+        <div id="page">
+            <img name="pendu" class="pendu" src="">
+            
+            <h1>Jeu du pendu</h1>
+            <h4 id="score">Score : 0</h4>
+            
+            <img id="image" src="" alt="">
+          <h2><i>Cliquez sur une lettre , si elle est dans le mot secret, elle sera affichée dans le cas contraire une partie du bonhomme du pendu  apparaitra !</i></h2>
+            
+            <table id="clavier">
+             <tr>
+              <td onclick="proposer(this);" >A</td>
+              <td onclick="proposer(this);" >B</td>
+              <td onclick="proposer(this);" >C</td>
+              <td onclick="proposer(this);" >D</td>
+              <td onclick="proposer(this);" >E</td>
+              <td onclick="proposer(this);" >F</td>
+              <td onclick="proposer(this);" >G</td>
+              <td onclick="proposer(this);" >H</td>
+              <td onclick="proposer(this);" >I</td>
+              <td onclick="proposer(this);" >J</td>
+             </tr>
+             <tr>
+              <td onclick="proposer(this);" >K</td>
+              <td onclick="proposer(this);" >L</td>
+              <td onclick="proposer(this);" >M</td>
+              <td onclick="proposer(this);" >N</td>
+              <td onclick="proposer(this);" >O</td>
+              <td onclick="proposer(this);" >P</td>
+              <td onclick="proposer(this);" >Q</td>
+              <td onclick="proposer(this);" >R</td>
+              <td onclick="proposer(this);" >S</td>
+              <td onclick="proposer(this);" >T</td>
+             </tr>
+             <tr>
+              <td onclick="proposer(this);" >U</td>
+              <td onclick="proposer(this);" >V</td>
+              <td onclick="proposer(this);" >W</td>
+              <td onclick="proposer(this);" >X</td>
+              <td onclick="proposer(this);" >Y</td>
+              <td onclick="proposer(this);" >Z</td>
+             </tr>
+            </table>
+            <br>
+            <a class="lien" href="PenduIndex.html">Nouvelle partie</a>
+            
+         
+
+          
+    <table id="mot">
+        <tr>
+            <script >
+                for(var i=0; i<tailleMot; i++) document.write("<td> <p id=\""+i+"\">"+motSecret.charAt(i)+"</p></td>");
+            </script>
+        </tr>
+    </table>
+    <script >
+        for(var i=0; i<tailleMot; i++) tableauMot[i]=document.getElementById(i);
+    </script>
+
+<h4 id="tiret"></h4>
+
+    <script>
+    let tiret = document.getElementById("tiret");
+            let mes_tiret = "";
+            for (let index = 0; index < tailleMot; index++) {
+                mes_tiret = mes_tiret + " _"; 
+            }
+        tiret.textContent=mes_tiret;
+
+
+
+
+    
+
+
+
+</script>
+
+
+        </div>
+
+        
+
+
+</body>
+</html>
